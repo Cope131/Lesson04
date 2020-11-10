@@ -26,49 +26,60 @@ import {
 
 import mt from 'moment-timezone';
 
+// Exercise 1
 const Welcome = () => {
   return <Text>Welcome to C308 Web Frameworks!</Text>;
 };
 
+// Exercise 2
 class MyFirstApp extends React.Component {
   render() {
     return <Text>My first React Native app</Text>;
   }
 }
 
+// Exercise 3
 const SemModule = (props) => {
   return <Text>{props.module}</Text>;
 };
 
+// Exercise 4
 class Eats extends React.Component {
   render() {
     return (
       <Text>
-        {this.props.name} {this.props.location} {'\n'}
+        {this.props.name} {'\n'}
+        {this.props.location} {'\n'}
       </Text>
     );
   }
 }
 
+// Mini Project
 class Clock extends React.Component {
   render() {
+    const name = this.props.name;
     return (
       <Text>
-        World Clock {'\n'}
-        <WorldClock name={'Asia/Singapore'}></WorldClock> {'\n'}
-        <WorldClock name={'Europe/London'}></WorldClock> {'\n'}
-        <WorldClock name={'America/New_York'}></WorldClock> {'\n'}
-        <WorldClock name={'Europe/Oslo'}></WorldClock> {'\n'}
+        {name} - {mt.tz(name).format('HH:mm')} {mt.tz(name).format('Z')} {'\n'}
       </Text>
     );
   }
 }
 
-const WorldClock = (props) => {
-  return <Text>{props.name} - {mt.tz(props.name).format('HH:MM')} {mt.tz(props.name).format('Z')}</Text>;
+const WorldClock = () => {
+  return (
+    <Text>
+      <Clock name={'Asia/Singapore'} />
+      <Clock name={'Europe/London'} />
+      <Clock name={'America/New_York'} />
+      <Clock name={'Europe/Oslo'} />
+    </Text>
+  );
 };
 
 const App: () => React$Node = () => {
+  //Exercise 5
   console.log('Listing semester modules and recommended eats');
   return (
     <>
@@ -85,20 +96,32 @@ const App: () => React$Node = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
+              {/*Exercise 1*/}
               <Welcome />
+              {/*Exercise 2*/}
               <MyFirstApp />
+              {/*Exercise 3*/}
               <Text>{'\n'}My modules this semester:</Text>
-              <SemModule module="Monday - C273, G962" />
-              <SemModule module="Tuesday - C308" />
-              <SemModule module="Wednesday - C390" />
-              <SemModule module="Thursday - C348" />
-              <SemModule module="Friday - E002, C001" />
+              <SemModule module={'Monday - C273, G962'} />
+              <SemModule module={'Tuesday - C308'} />
+              <SemModule module={'Wednesday - C390'} />
+              <SemModule module={'Thursday - C348'} />
+              <SemModule module={'Friday - E002, C001'} />
+              {/*Exercise 4*/}
               <Text>{'\n'}Recommended Eats @ RP:</Text>
-              <Eats name="Sweet Tooth Waffles" location="W6 Level 1, E-canteen" />
+              <Eats
+                name="Sweet Tooth Waffles"
+                location="W6 Level 1, E-canteen"
+              />
               <Eats name="Crowded Bowl" location="W4/W6 Lawn Canteen" />
-              <Eats name="Eastern Cuisine @ Koufu" location="E1 Level 1, Koufu" />
+              <Eats
+                name="Eastern Cuisine @ Koufu"
+                location="E1 Level 1, Koufu"
+              />
               <Eats name="Ayam Penyet" location="W4/W6 Lawn Canteen" />
-              <Clock />
+              {/*Mini Project*/}
+              <Text>World Clock</Text>
+              <WorldClock />
             </View>
           </View>
         </ScrollView>

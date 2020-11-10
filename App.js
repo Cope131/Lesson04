@@ -24,6 +24,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import mt from 'moment-timezone';
+
 const Welcome = () => {
   return <Text>Welcome to C308 Web Frameworks!</Text>;
 };
@@ -52,11 +54,19 @@ class Clock extends React.Component {
   render() {
     return (
       <Text>
-        {this.props.name} {this.props.time}
+        World Clock {'\n'}
+        <WorldClock name={'Asia/Singapore'}></WorldClock> {'\n'}
+        <WorldClock name={'Europe/London'}></WorldClock> {'\n'}
+        <WorldClock name={'America/New_York'}></WorldClock> {'\n'}
+        <WorldClock name={'Europe/Oslo'}></WorldClock> {'\n'}
       </Text>
     );
   }
 }
+
+const WorldClock = (props) => {
+  return <Text>{props.name} - {mt.tz(props.name).format('HH:MM')} {mt.tz(props.name).format('Z')}</Text>;
+};
 
 const App: () => React$Node = () => {
   console.log('Listing semester modules and recommended eats');
@@ -88,6 +98,7 @@ const App: () => React$Node = () => {
               <Eats name="Crowded Bowl" location="W4/W6 Lawn Canteen" />
               <Eats name="Eastern Cuisine @ Koufu" location="E1 Level 1, Koufu" />
               <Eats name="Ayam Penyet" location="W4/W6 Lawn Canteen" />
+              <Clock />
             </View>
           </View>
         </ScrollView>
